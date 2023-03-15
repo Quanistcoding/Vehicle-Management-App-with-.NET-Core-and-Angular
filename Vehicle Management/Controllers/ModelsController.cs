@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Vehicle_Management.Controllers.Resources;
 using Vehicle_Management.Data;
 using Vehicle_Management.Models;
 
@@ -15,31 +18,35 @@ namespace Vehicle_Management.Controllers
     public class ModelsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ModelsController(ApplicationDbContext context)
+        public ModelsController(ApplicationDbContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Models
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Model>>> GetModels()
+        public async Task<ActionResult<IEnumerable<ModelResource>>> GetModels()
         {
-            return await _context.Models.ToListAsync();
+            var models = await _context.Models.Include(m => m.Make).ToListAsync();
+
+            return _mapper.Map<List<ModelResource>>(models);
         }
 
         // GET: api/Models/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Model>> GetModel(int id)
+        public async Task<ActionResult<ModelResource>> GetModel(int id)
         {
-            var model = await _context.Models.FindAsync(id);
+            var model = await _context.Models.Include(m => m.Make).FirstOrDefaultAsync(model => model.Id == id);
 
             if (model == null)
             {
                 return NotFound();
             }
 
-            return model;
+            return _mapper.Map<ModelResource>(model);
         }
 
         // PUT: api/Models/5
@@ -76,7 +83,7 @@ namespace Vehicle_Management.Controllers
         // POST: api/Models
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Model>> PostModel(Model model)
+        public async Task<ActionResult<ModelResource>> PostModel(Model model)
         {
             _context.Models.Add(model);
             await _context.SaveChangesAsync();

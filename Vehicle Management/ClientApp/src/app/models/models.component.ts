@@ -38,7 +38,9 @@ export class ModelsComponent implements OnInit {
   }
 
   deleteModel(id:number) {
-
+    this.modelService.deleteOne(id).subscribe(res => {
+      this.models = this.models.filter(model => model.id !== id);
+    })
   }
 
 

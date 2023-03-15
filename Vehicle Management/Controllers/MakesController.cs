@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Vehicle_Management.Controllers.Resources;
 using Vehicle_Management.Data;
 using Vehicle_Management.Models;
 
@@ -15,18 +17,20 @@ namespace Vehicle_Management.Controllers
     public class MakesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MakesController(ApplicationDbContext context)
+        public MakesController(ApplicationDbContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Makes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Make>>> GetMakes()
+        public async Task<ActionResult<IEnumerable<MakeResource>>> GetMakes()
         {
-            Console.WriteLine("asd");
-            return await _context.Makes.ToListAsync();
+            var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
+            return _mapper.Map<List<MakeResource>>(makes);
         }
 
         // GET: api/Makes/5

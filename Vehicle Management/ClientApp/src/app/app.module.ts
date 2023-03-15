@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ModelsComponent } from './models/models.component';
 import { MakesComponent } from './makes/makes.component';
 import { MakeEditComponent } from './make-edit/make-edit.component';
+import { GetNamesPipe } from './pipes/get-names.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MakeEditComponent } from './make-edit/make-edit.component';
     FetchDataComponent,
     ModelsComponent,
     MakesComponent,
-    MakeEditComponent
+    MakeEditComponent,
+    GetNamesPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

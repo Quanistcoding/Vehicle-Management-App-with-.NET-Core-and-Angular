@@ -34,6 +34,9 @@ export class MakesComponent implements OnInit {
   }
 
   deleteMake(id: number) {
+    var confirmed = confirm("Are you sure you want to delete item " + id);
+    if (!confirmed) return;
+
     this.makeService.deleteOne(id).subscribe(res => {
      this.makes = this.makes.filter(make => make.id !== id);
     })

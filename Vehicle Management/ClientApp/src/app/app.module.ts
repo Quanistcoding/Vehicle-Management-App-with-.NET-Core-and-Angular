@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ModelsComponent } from './models/models.component';
 import { MakesComponent } from './makes/makes.component';
+import { MakeEditComponent } from './make-edit/make-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MakesComponent } from './makes/makes.component';
     CounterComponent,
     FetchDataComponent,
     ModelsComponent,
-    MakesComponent
+    MakesComponent,
+    MakeEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +33,8 @@ import { MakesComponent } from './makes/makes.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'models', component: ModelsComponent },
-      { path: 'makes', component: MakesComponent }
+      { path: 'makes', component: MakesComponent },
+      { path: 'makes/edit/:id', component: MakeEditComponent }
     ])
   ],
   providers: [],

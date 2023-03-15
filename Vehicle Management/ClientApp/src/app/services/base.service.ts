@@ -14,16 +14,16 @@ export class BaseService {
     return this.service.get(this.baseUrl + this.modelName) as Observable<T[]>;
   }
 
-  public getOne(id:number) {
-    return this.service.get(this.baseUrl + this.modelName + '/' + id);
+  public getOne<T>(id:number) {
+    return this.service.get(this.baseUrl + this.modelName + '/' + id) as Observable<T>;;
   }
 
   public addOne<T>(resource: T) {
     return this.service.post(this.baseUrl + this.modelName, resource);
   }
 
-  public updateOne<T>(resource: T) {
-    return this.service.put(this.baseUrl + this.modelName, resource);
+  public updateOne<T>(id:number,resource: T) {
+    return this.service.put(this.baseUrl + this.modelName + '/' + id, resource);
   }
 
   public deleteOne(id: number) {

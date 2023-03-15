@@ -22,7 +22,7 @@ export class BaseService {
   }
 
   public addOne<T>(resource: T) {
-    return this.service.post(this.constructedUri, resource);
+    return this.service.post(this.constructedUri, resource) as Observable<T>;;
   }
 
   public updateOne<T>(id:number,resource: T) {

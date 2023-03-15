@@ -1,14 +1,22 @@
 <h3>Vehicle Models</h3>
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Make Title" [(ngModel)]="modelTitle">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addModel()">Add</button>
+<form #form="ngForm" (ngSubmit)="addModel(form)">
+
+  <div class="form-group">
+    <input type="text" class="form-control" id="modelTitle" placeholder="Model Title" name="name" #modelTitle="ngModel" ngModel required>
+    <div class="alert alert-danger" *ngIf="modelTitle.touched && modelTitle.errors">Model title is required.</div>
   </div>
-</div>
+  <label for="make">Choose a Make</label>
+  <select id="make" class="form-control" ngModel name="makeId" required #make="ngModel">
+    <option *ngFor="let make of makes" [value]="make.id">{{make.name}}</option>
+  </select>
+  <div class="alert alert-danger" *ngIf="make.touched && make.errors">Make is required.</div>
+  <button type="submit" class="btn btn-primary my-2" [disabled]="form.invalid">Add</button>
+</form>
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Id</th>
       <th scope="col">Model</th>
       <th scope="col">Make</th>
       <th scope="col"></th>

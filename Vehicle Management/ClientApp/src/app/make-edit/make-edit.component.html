@@ -5,11 +5,11 @@
 
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="make.name" name="name" required #makeTitle="ngModel">
-    <div *ngIf="makeTitle.invalid && (makeTitle.dirty || makeTitle.touched)">
-      <div  class="alert alert-danger mt-2" *ngIf="makeTitle.errors?.['required']">
-        Name is required.
-      </div>
+    <input type="text" class="form-control" id="name" [(ngModel)]="make.name" name="name" required #makeTitle ="ngModel">
+      <div *ngIf="makeTitle.invalid && (makeTitle.dirty || makeTitle.touched)">
+        <div  class="alert alert-danger mt-2" *ngIf="makeTitle.errors?.['required']">
+          Name is required.
+        </div>
     </div>
   </div>
 

@@ -8,25 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class BaseService {
   private baseUrl = "https://localhost:44490/api/";
-  constructor(protected service: HttpClient, @Inject('MODEL_NAME') protected modelName:string) {}
+  private constructedUri: string;
+  constructor(protected service: HttpClient, @Inject('MODEL_NAME') protected modelName: string) {
+    this.constructedUri = this.baseUrl + this.modelName;
+  }
 
-  public getAll<T>(): Observable<T[]> {
-    return this.service.get(this.baseUrl + this.modelName) as Observable<T[]>;
+  public getAll<T>(){
+    return this.service.get(this.constructedUri) as Observable<T[]>;
   }
 
   public getOne<T>(id:number) {
-    return this.service.get(this.baseUrl + this.modelName + '/' + id) as Observable<T>;;
+    return this.service.get(this.constructedUri + '/' + id) as Observable<T>;;
   }
 
   public addOne<T>(resource: T) {
-    return this.service.post(this.baseUrl + this.modelName, resource);
+    return this.service.post(this.constructedUri, resource);
   }
 
   public updateOne<T>(id:number,resource: T) {
-    return this.service.put(this.baseUrl + this.modelName + '/' + id, resource);
+    return this.service.put(this.constructedUri + '/' + id, resource);
   }
 
   public deleteOne(id: number) {
-    return this.service.delete(this.baseUrl + this.modelName + '/' + id);
+    return this.service.delete(this.constructedUri + '/' + id);
   }
 }

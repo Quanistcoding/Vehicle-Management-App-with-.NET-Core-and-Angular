@@ -1,1 +1,26 @@
-<p>models works!</p>
+<h3>Vehicle Models</h3>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Make Title" [(ngModel)]="modelTitle">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addModel()">Add</button>
+  </div>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Make</th>
+      <th scope="col">Models</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let model of models">
+      <th>{{model.id}}</th>
+      <td>{{model.name}}</td>
+      <td></td>
+      <td><button class="btn-primary btn" [routerLink]="['/models/edit/' + model.id]">Update</button><button class="btn-danger btn ms-2" (click)="deleteModel(model.id!)">Delete</button></td>
+    </tr>
+
+  </tbody>
+</table>

@@ -13,7 +13,7 @@ export class MakeEditComponent implements OnInit {
   public make: Make = {
     id: 0,
     name:""
-  }
+  };
 ;
 
   constructor(private route: ActivatedRoute,private sercice:MakeService,private router:Router) { }

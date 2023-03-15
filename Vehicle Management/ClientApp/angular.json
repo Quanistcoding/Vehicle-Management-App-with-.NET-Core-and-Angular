@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "Vehicle_Management"
+  "defaultProject": "Vehicle_Management",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,12 +1,17 @@
 <h2>Edit Make Item {{make.id}}</h2>
 <form (ngSubmit)="editMake(form)" #form="ngForm">
 
-  <input type="text" class="form-control" id="name" [(ngModel)]="make.id" name="id" hidden>
+  <input type="text" class="form-control" id="name" [(ngModel)]="make.id" name="id" hidden readonly>
 
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="make.name" name="name">
+    <input type="text" class="form-control" id="name" [(ngModel)]="make.name" name="name" required #makeTitle="ngModel">
+    <div *ngIf="makeTitle.invalid && (makeTitle.dirty || makeTitle.touched)">
+      <div  class="alert alert-danger mt-2" *ngIf="makeTitle.errors?.['required']">
+        Name is required.
+      </div>
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-primary mt-2">Edit</button>
+  <button type="submit" class="btn btn-primary mt-2" [disabled]="form.invalid">Edit</button>
 </form>

@@ -28,6 +28,7 @@ export class MakeEditComponent implements OnInit {
 
 
   editMake(form: any) {
+    console.log(form)
     this.sercice.updateOne(this.make.id!, form.value).subscribe(res => {
       this.router.navigate(['/makes']);
     });

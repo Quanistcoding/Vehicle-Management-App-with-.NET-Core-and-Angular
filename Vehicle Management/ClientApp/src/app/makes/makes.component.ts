@@ -32,4 +32,10 @@ export class MakesComponent implements OnInit {
       this.makes.push(res as Make);
     });
   }
+
+  deleteMake(id: number) {
+    this.makeService.deleteOne(id).subscribe(res => {
+     this.makes = this.makes.filter(make => make.id !== id);
+    })
+  }
 }

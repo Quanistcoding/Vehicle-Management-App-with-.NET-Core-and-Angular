@@ -18,7 +18,7 @@ export class BaseService {
     return this.service.get(this.baseUrl + this.modelName + '/' + id);
   }
 
-  public addOne<T>(resource:T) {
+  public addOne<T>(resource: T) {
     return this.service.post(this.baseUrl + this.modelName, resource);
   }
 

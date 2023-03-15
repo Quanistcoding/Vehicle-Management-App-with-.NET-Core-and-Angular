@@ -1,7 +1,7 @@
 import { Model } from "./Model";
 
 export interface Make {
-  id: number,
+  id?: number,
   name: string,
-  Models:Model[]
+  Models?:Model[]
 }

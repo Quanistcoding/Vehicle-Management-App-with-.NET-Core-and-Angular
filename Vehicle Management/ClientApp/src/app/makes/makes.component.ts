@@ -11,12 +11,25 @@ import { MakeService } from '../services/make.service';
   styleUrls: ['./makes.component.css']
 })
 export class MakesComponent implements OnInit {
-  public makes$?: Observable<Make[]>;
+  public makeTitle = "";
+  public makes:Make[] = [];
 
   constructor(private makeService:MakeService) { }
 
   ngOnInit(): void {
-    this.makes$ = this.makeService.getAll<Make>();
+    this.makeService.getAll<Make>().subscribe(makes => {
+      this.makes = makes;
+    });
   }
 
+  addMake() {
+    if (!this.makeTitle) {
+      return alert("Make Title is required!");
+    }
+    this.makeService.addOne<Make>({
+      name:this.makeTitle
+    }).subscribe(res => {
+      this.makes.push(res as Make);
+    });
+  }
 }

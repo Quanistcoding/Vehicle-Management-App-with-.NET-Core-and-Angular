@@ -1,4 +1,10 @@
 <h3>Vehicle Makes</h3>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Make Title" [(ngModel)] = "makeTitle">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click) ="addMake()">Add</button>
+  </div>
+</div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -9,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor ="let make of makes$ | async">
+    <tr *ngFor ="let make of makes">
       <th>{{make.id}}</th>
       <td>{{make.name}}</td>
       <td></td>

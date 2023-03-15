@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MakeService } from '../services/make.service';
 
 @Component({
   selector: 'app-makes',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MakesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private makeService:MakeService) { }
 
   ngOnInit(): void {
+    this.makeService.getAll().subscribe(makes => {
+      console.log(makes);
+    });
   }
 
 }
